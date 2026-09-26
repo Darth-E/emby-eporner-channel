@@ -1,0 +1,107 @@
+<div is="emby-scroller" class="view flex flex-direction-column scrollFrameY flex-grow" data-horizontal="false" data-forcescrollbar="true" data-centerfocus="true" data-bindheader="true" data-controller="__plugin/epornerjs" data-title="Eporner">
+    <div class="scrollSlider flex-grow flex-direction-column padded-left padded-left-page padded-right padded-top-page padded-bottom-page">
+        <form class="auto-center epornerConfigForm">
+                <div class="selectContainer">
+                    <select is="emby-select" id="ddlOrder" label="Video sort order">
+                        <option value="latest">Latest</option>
+                        <option value="most-popular">Most popular</option>
+                        <option value="top-weekly">Top weekly</option>
+                        <option value="top-monthly">Top monthly</option>
+                        <option value="longest">Longest</option>
+                        <option value="shortest">Shortest</option>
+                        <option value="top-rated">Top rated</option>
+                    </select>
+                </div>
+                <div class="selectContainer">
+                    <select is="emby-select" id="ddlThumb" label="Thumbnail size">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="big">Big</option>
+                    </select>
+                </div>
+                <div class="selectContainer">
+                    <select is="emby-select" id="ddlGay" label="Gay content">
+                        <option value="0">Exclude</option>
+                        <option value="1">Include</option>
+                        <option value="2">Only</option>
+                    </select>
+                </div>
+                <div class="selectContainer">
+                    <select is="emby-select" id="ddlTrans" label="Trans content">
+                        <option value="0">Exclude</option>
+                        <option value="1">Include</option>
+                        <option value="2">Only</option>
+                    </select>
+                    <div class="fieldDescription">ePorner's API has no trans filter, so this matches words like "shemale", "trans", "ladyboy" in title and keywords. It is a best-effort filter.</div>
+                </div>
+                <div class="selectContainer">
+                    <select is="emby-select" id="ddlLq" label="Low quality videos">
+                        <option value="0">Exclude</option>
+                        <option value="1">Include</option>
+                        <option value="2">Only</option>
+                    </select>
+                    <div class="fieldDescription">"Exclude" hides videos that ePorner flags as low quality. This is ePorner's own rating, not a resolution limit: flagged videos can still be available in 720p or higher. With "Exclude", rare search terms can lose most of their results. Choose "Include" to get the same results as the ePorner website.</div>
+                </div>
+                <div class="selectContainer">
+                    <select is="emby-select" id="txtMaxHeight" label="Maximum video quality">
+                        <option value="0">Best available (recommended)</option>
+                        <option value="2160">2160p (4K)</option>
+                        <option value="1440">1440p</option>
+                        <option value="1080">1080p (Full HD)</option>
+                        <option value="720">720p (HD)</option>
+                        <option value="480">480p</option>
+                        <option value="360">360p</option>
+                        <option value="240">240p</option>
+                    </select>
+                    <div class="fieldDescription">Limits the highest quality offered when playing. Videos come in different qualities (240p up to 1080p or more, depending on the video). Emby streams everything through your server, so a lower limit saves bandwidth. Choose "Best available" if unsure.</div>
+                </div>
+                <div class="inputContainer">
+                    <input is="emby-input" type="number" id="txtCache" label="Cache lifetime (minutes)" min="0" />
+                </div>
+                <div class="inputContainer">
+                    <input is="emby-input" type="number" id="txtInterval" label="Min. request interval (ms)" min="0" />
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label>
+                        <input is="emby-checkbox" type="checkbox" id="chkDedupe" />
+                        <span>Show each video in only one category</span>
+                    </label>
+                    <div class="fieldDescription checkboxFieldDescription">Prevents the same video appearing several times in Emby's "Latest" row. Refresh the channel after changing.</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label>
+                        <input is="emby-checkbox" type="checkbox" id="chkRemoved" />
+                        <span>Hide removed videos</span>
+                    </label>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label>
+                        <input is="emby-checkbox" type="checkbox" id="chkEmbed" />
+                        <span>Embed URL fallback (not playable in Emby)</span>
+                    </label>
+                </div>
+                <div class="verticalSection">
+                    <h2 class="sectionTitle">Categories</h2>
+                    <div class="inputContainer">
+                        <input is="emby-input" type="number" id="txtCatVideos" label="Default videos per category (1-1000)" min="1" max="1000" />
+                    </div>
+                    <div class="inputContainer">
+                        <input is="emby-input" type="text" id="txtCustomQueries" label="Custom queries (comma-separated)" placeholder="e.g. Skinny Teen, Amateur Anal, ..." />
+                        <div class="fieldDescription">Extra search terms shown as folders next to the categories. Each uses the default video count above. Separate several terms with commas.</div>
+                    </div>
+                    <div class="inputContainer">
+                        <input is="emby-input" type="text" id="txtCatFilter" label="Filter / Search categories" />
+                    </div>
+                    <div style="margin-bottom:1em;">
+                        <button is="emby-button" type="button" class="raised" id="btnCatAll"><span>Select all</span></button>
+                        <button is="emby-button" type="button" class="raised" id="btnCatNone"><span>Select none</span></button>
+                    </div>
+                    <div class="fieldDescription" style="margin-bottom:.5em;">Tick the categories to show. The number field overrides the default video count for that category (empty = default). Refresh the channel in Emby after saving.</div>
+                    <div id="epCatList" style="max-height:28em;overflow:auto;"></div>
+                </div>
+                <div>
+                    <button is="emby-button" type="submit" class="raised button-submit block"><span>Save</span></button>
+                </div>
+            </form>
+    </div>
+</div>

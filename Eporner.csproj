@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Emby.Plugins.Eporner</RootNamespace>
+    <AssemblyName>Emby.Plugins.Eporner</AssemblyName>
+    <Version>1.0.0.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <PathMap>$(MSBuildProjectDirectory)=.</PathMap>
+    <EmbyVersion>4.10.0.24-beta2</EmbyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediaBrowser.Server.Core" Version="$(EmbyVersion)" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\configPage.html" />
+    <EmbeddedResource Include="Configuration\epornerConfig.js" />
+    <EmbeddedResource Include="Resources\logo.png" />
+  </ItemGroup>
+
+  <!--
+    Post-build: copy the DLL into the Emby plugins folder.
+    Usage:  dotnet build -c Release -p:EmbyPluginsDir="<Emby data folder>\plugins"
+    (Restart Emby afterwards.) If the property is not set, nothing is copied.
+  -->
+  <Target Name="CopyToEmby" AfterTargets="Build" Condition="'$(EmbyPluginsDir)' != ''">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(EmbyPluginsDir)" />
+    <Message Importance="high" Text="Copied $(TargetFileName) to $(EmbyPluginsDir)" />
+  </Target>
+
+</Project>

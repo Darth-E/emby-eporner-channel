@@ -6,7 +6,7 @@
 
 Emby channel that lists ePorner videos by category (or custom search term) and plays them. It uses the official **API v2** for the video lists and reads the ePorner website for the category list and the stream links.
 The channel carries the `XXX` parental rating.
-Built against `MediaBrowser.Server.Core 4.10.0.24-beta2` (netstandard2.0) and tested on Emby Server 4.11.0.3.
+Built against `MediaBrowser.Server.Core 4.10.0.24-beta2` (netstandard2.0). Tested on Emby Server **4.10.0.40 (stable)** and **4.11.0.3 (beta)**.
 
 ## Structure
 
@@ -41,7 +41,7 @@ Resources/logo.png             plugin and channel image
 2. Copy it into the `plugins` folder inside your Emby server's data folder (`<Emby data folder>\plugins`; the data path is shown on the Emby dashboard).
 3. Restart Emby Server.
 
-The release is built against Emby Server 4.10 and only tested on 4.11.0.3.
+The release is built against Emby Server 4.10 and tested on 4.10.0.40 (stable) and 4.11.0.3 (beta).
 
 ### Option 2: build it yourself
 
@@ -54,8 +54,7 @@ To build for another Emby version: `-p:EmbyVersion=<nuget version>` (the channel
 
 ### First steps
 
-Open **Dashboard → Advanced → Eporner** and tick the categories you want (none are selected on a fresh install, so the channel stays empty until you do), save, and run the scheduled task
-*Refresh Internet Channels*. The channel then shows up as *Eporner* in the library menu. If the settings page looks stale after an update, hard-refresh the browser (Ctrl+F5).
+Open **Dashboard → Advanced → Eporner** and tick the categories you want (none are selected on a fresh install, so the channel stays empty until you do), save, and then run **Dashboard → Scheduled Tasks → Refresh Internet Channels** to apply the changes (with many categories this can take several minutes). The channel then shows up as *Eporner* in the library menu. If the settings page looks stale after an update, hard-refresh the browser (Ctrl+F5).
 
 ## Settings
 
@@ -92,7 +91,7 @@ Open **Dashboard → Advanced → Eporner** and tick the categories you want (no
 
 * **Categories:** the folder list (name + image) is scraped from https://www.eporner.com/cats/ and cached 24 h; the category slug is used as API query. If that page changes and cannot be read, the category list stays empty.
 * **Videos per folder:** each folder loads up to the configured number of videos. If *Show each video in only one category* hides videos, more API pages are fetched (at most 20 requests per folder). A full refresh of many categories can take many minutes.
-* **Sorting/paging:** Emby caches each folder as one full list and sorts it itself (default alphabetical); pick *Date added*/*Rating* in the client sort menu. Reload with the scheduled task *Refresh Internet Channels*.
+* **Sorting/paging:** Emby caches each folder as one full list and sorts it itself (default alphabetical); pick *Date added*/*Rating* in the client sort menu. Reload with **Dashboard → Scheduled Tasks → Refresh Internet Channels**.
 * **Broken titles:** the ePorner API double-encodes non-ASCII text; the plugin repairs this, but titles whose bytes are already damaged in the API stay garbled.
 * **No direct search box:** current Emby versions ignore `ISearchableChannel`. Use *Custom queries* for saved searches.
 * **Scraping is unofficial.** It depends on the `EP.video.player.hash` variable, the hash encoding and the `/xhr/video/` JSON shape.
@@ -100,7 +99,7 @@ Open **Dashboard → Advanced → Eporner** and tick the categories you want (no
 * Stream URLs are bound to the IP that requested them, so Emby always proxies the stream (direct play is disabled).
 * DASH sources are ignored. HLS sources are passed on if ePorner offers them (untested).
 * `/video/removed/` redirects to a plain-text list of ids (one per line); the client parses that and caches it for at least an hour.
-* Only tested on Emby Server 4.11.0.3.
+* Only tested on Emby Server 4.10.0.40 (stable) and 4.11.0.3 (beta); other versions are untested.
 * Respect ePorner's API terms and rate limits (default: ≥500 ms between requests).
 
 ## License

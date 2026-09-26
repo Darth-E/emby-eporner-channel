@@ -66,7 +66,7 @@
                         <input is="emby-checkbox" type="checkbox" id="chkDedupe" />
                         <span>Show each video in only one category</span>
                     </label>
-                    <div class="fieldDescription checkboxFieldDescription">Prevents the same video appearing several times in Emby's "Latest" row. Refresh the channel after changing.</div>
+                    <div class="fieldDescription checkboxFieldDescription">Prevents the same video appearing several times in Emby's "Latest" row. After saving, run Dashboard → Scheduled Tasks → Refresh Internet Channels to apply the changes.</div>
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescription">
                     <label>
@@ -96,7 +96,7 @@
                         <button is="emby-button" type="button" class="raised" id="btnCatAll"><span>Select all</span></button>
                         <button is="emby-button" type="button" class="raised" id="btnCatNone"><span>Select none</span></button>
                     </div>
-                    <div class="fieldDescription" style="margin-bottom:.5em;">Tick the categories to show. The number field overrides the default video count for that category (empty = default). Refresh the channel in Emby after saving.</div>
+                    <div class="fieldDescription" style="margin-bottom:.5em;">Tick the categories to show. The number field overrides the default video count for that category (empty = default). After saving, run Dashboard → Scheduled Tasks → Refresh Internet Channels to apply the changes. With many categories this can take several minutes.</div>
                     <div id="epCatList" style="max-height:28em;overflow:auto;"></div>
                 </div>
                 <div>

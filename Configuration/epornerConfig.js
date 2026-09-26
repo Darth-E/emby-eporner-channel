@@ -130,7 +130,7 @@ define(['baseView', 'loading', 'emby-input', 'emby-button', 'emby-checkbox', 'em
 
             ApiClient.updatePluginConfiguration(PluginUniqueId, c).then(function () {
                 loading.hide();
-                toast('Settings saved. Run "Refresh Internet Channels" to apply.');
+                toast('Saved. Now run Scheduled Tasks → Refresh Internet Channels.');
             }, function () {
                 loading.hide();
                 toast('Saving failed');
